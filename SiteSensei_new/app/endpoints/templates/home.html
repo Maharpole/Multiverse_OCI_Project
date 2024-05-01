@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sitemap Submission</title>
+    <style>
+        #loadingBar {
+            width: 0%;
+            height: 30px;
+            background-color: #4CAF50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            display: none; /* Hidden by default */
+        }
+    </style>
+</head>
+<body>
+    <div id="responseArea">Here will be the response</div>
+    <h1>Sitemap Submission Form</h1>
+    <form id="sitemapForm">
+        <label for="sitemap_url">Enter Sitemap URL:</label>
+        <input type="text" id="sitemap_url" name="sitemap_url" required>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="loadingBar">Processing...</div>
+
+    <!-- Including jQuery for simplicity -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#sitemapForm').submit(function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                var formData = {
+                    'sitemap_url': $('input[name=sitemap_url]').val()
+                };
+
+                // Show the loading bar and start animating
+                $('#loadingBar').css('display', 'block');
+                animateLoadingBar();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/processSitemap',
+                    data: formData,
+                    dataType: 'json',
+                    encode: true
+                })
+                .done(function(data) {
+                    // Hide the loading bar and display the response
+                    $('#loadingBar').css('display', 'none').width(0);
+                    $('#responseArea').html(JSON.stringify(data, null, 4)); // Pretty print the JSON
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    $('#loadingBar').css('display', 'none').width(0);
+                    $('#responseArea').html("Error: " + textStatus + " - " + errorThrown);
+                });
+            });
+
+            function animateLoadingBar() {
+                var width = 1;
+                var id = setInterval(frame, 10);
+                function frame() {
+                    if (width >= 100) {
+                        clearInterval(id);
+                    } else {
+                        width++;
+                        $('#loadingBar').css('width', width + '%');
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
