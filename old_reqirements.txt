@@ -1,0 +1,10 @@
+lanchain
+langchain-openai
+langchain-community
+faiss-cpu
+tiktoken
+unstructured
+python-magic
+python-magic-bin
+libmagic
+langchain-core
