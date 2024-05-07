@@ -54,7 +54,12 @@
                     // Hide Loader | Show Form | display response
                     $('.loader-container').css('display', 'none');
                     $('#sitemapForm').css('display', 'block');
-                    $('#responseArea').html(JSON.stringify(data, null, 4)); // Pretty print the JSON
+                    //Parse the result and display it in the response area
+                    if (data && data.results && data.results.result) {
+                        $('#responseArea').html(data.results.result);  // Displaying the result
+                    } else {
+                        $('#responseArea').html("No result available.");
+                    }   
                 })
                 .fail(function(jqXHR, textStatus, errorThrown) {
                     $('.loader-container').css('display', 'none');

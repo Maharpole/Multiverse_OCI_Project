@@ -47,10 +47,14 @@
                     encode: true
                 })
                 .done(function(data) {
-                    // Hide Loader | Show Form
-                    $('.loader-container').css('display', 'none');
-                    $('#sitemapForm').css('display', 'block');
-                    $('#responseArea').html(JSON.stringify(data, null, 4)); // Pretty print the JSON
+                $('.loader-container').css('display', 'none');
+                $('#sitemapForm').css('display', 'block');
+                // display generated API Key
+                if (data && data.api_key) {
+                    $('#responseArea').html("API Key: " + data.api_key, "Please save this in a safe space, you will not have access to this again.");
+                } else {
+                    $('#responseArea').html("API Key not found in the response.");
+                }
                 })
                 .fail(function(jqXHR, textStatus, errorThrown) {
                     $('.loader-container').css('display', 'none');
