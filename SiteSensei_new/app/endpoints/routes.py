@@ -34,7 +34,7 @@ def index():
 async def process_sitemap():
     # Retrieve URL from request
     sitemap_url = request.form['sitemap_url']
-    
+    print("sitemap_url: ", sitemap_url)
     # Check for valid URL (error handling)
     parsed_url = urlparse(sitemap_url)
     if not parsed_url.scheme or not parsed_url.netloc:
