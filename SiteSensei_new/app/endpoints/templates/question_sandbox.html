@@ -35,7 +35,7 @@
             $('#sitemapForm').submit(function(event) {
                 event.preventDefault(); // Prevent the default form submission
                 var formData = {
-                    'api_key': $('input[name=api_key]').val()
+                    'api_key': $('input[name=api_key]').val(),
                     'query': $('input[name=query]').val()
                 };
 
@@ -46,12 +46,12 @@
                 $.ajax({
                     type: 'POST',
                     url: '/askQuestion',
-                    data: raw,
+                    data: formData,
                     dataType: 'json',
                     encode: true
                 })
                 .done(function(data) {
-                    // Hide Loader | Show Form
+                    // Hide Loader | Show Form | display response
                     $('.loader-container').css('display', 'none');
                     $('#sitemapForm').css('display', 'block');
                     $('#responseArea').html(JSON.stringify(data, null, 4)); // Pretty print the JSON
