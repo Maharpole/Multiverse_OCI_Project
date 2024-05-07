@@ -88,8 +88,8 @@ async def process_sitemap():
 @app.route('/askQuestion', methods=['POST'])
 def ask_question():
     # Extract API key and query from the POST request
-    api_key = request.json.get('api_key')
-    user_query = request.json.get('query')
+    api_key = request.form('api_key')
+    user_query = request.form('query')
 
     if not api_key or not user_query:
         return jsonify({'error': 'Missing API key or query'}), 400
