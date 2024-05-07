@@ -24,6 +24,7 @@ body {
     padding: 10px;
     background-color: #eaeaea;
     border: 1px solid #ccc;
+    border-radius: 10px;
     min-height: 50px;
     word-wrap: break-word;
 }
