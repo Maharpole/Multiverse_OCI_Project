@@ -22,11 +22,15 @@ app = Flask(__name__)
 embedding = OpenAIEmbeddings()
 initialize_db()
 
-#Front End root endpoint
+#Front End endpoints
 
 @app.route('/', methods=['GET'])
 def index():
     return render_template("index.html")
+
+@app.route('/question_sandbox', methods=['GET'])
+def sandbox():
+    return render_template('question_sandbox.html')
 
 #Process Sitemap Endpoint
 

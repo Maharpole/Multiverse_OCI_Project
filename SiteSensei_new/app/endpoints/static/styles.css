@@ -9,10 +9,11 @@ body {
 }
 
 #card {
-    background: rgb(250, 251, 255);
+    background-color: rgb(250, 251, 255);
     padding: 20px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.26);
-    border-radius: 8px;
+    border-radius: 20px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
     width: 300px;
     text-align: center;
 }
@@ -82,3 +83,31 @@ button:hover {
   @keyframes l3 {
       100% {background-position: left top,center top,right top }
   }
+
+#container {
+    margin: 20px 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.26);
+    border-radius: 20px;
+}
+.navbar {
+    display: flex; /* Enables flexbox */
+    justify-content: space-around; /* Distributes space around items */
+    align-items: center; /* Vertically centers the items in the navbar */
+    background: rgb(132,130,161);
+    background: linear-gradient(0deg, rgb(209, 208, 223) 0%, rgba(255,255,255,1) 100%);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.navbar a {
+    float:inline-start;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 20px 30px;
+    text-decoration: none;
+}
+.navbar a:hover {
+    background-color: rgb(218, 218, 218);
+    color: black;
+    
+}

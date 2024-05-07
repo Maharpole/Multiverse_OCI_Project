@@ -12,15 +12,18 @@
             <a href="/question_sandbox">Question Sandbox</a>
         </div>
         <div id="card">
-            <h1>Generate API Key</h1>
+            <h1>Question Sandbox</h1>
             <div id="responseArea"></div>
             <div class="loader-container">
                 <div class="loader"></div>
             </div>
             <form id="sitemapForm">
-                <label for="sitemap_url">Enter Sitemap URL:</label>
-                <input type="text" id="sitemap_url" name="sitemap_url" required>
-                <button type="submit">Submit</button>
+                <label for="api_key">Enter API key:</label>
+                <input type="text" id="api_key" name="api_key" required>
+                <label for="query">Enter Question:</label>
+                <input type="text" id="query" name="query" required>
+                
+                <button type="submit">Ask Question</button>
             </form>
         </div>
     </div>
@@ -32,7 +35,8 @@
             $('#sitemapForm').submit(function(event) {
                 event.preventDefault(); // Prevent the default form submission
                 var formData = {
-                    'sitemap_url': $('input[name=sitemap_url]').val()
+                    'api_key': $('input[name=api_key]').val()
+                    'query': $('input[name=query]').val()
                 };
 
                 // Show the loader and hide the form
@@ -41,7 +45,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: '/processSitemap',
+                    url: '/askQuestion',
                     data: formData,
                     dataType: 'json',
                     encode: true
