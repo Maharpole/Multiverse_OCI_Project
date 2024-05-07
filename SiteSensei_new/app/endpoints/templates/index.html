@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot Generator</title>
+    <link rel="stylesheet" type= "text/css"href="static/styles.css">
+</head>
+<body>
+    <div id="card">
+        <h1>Generate API Key</h1>
+        <div id="responseArea"></div>
+        <div class="loader-container">
+            <div class="loader"></div>
+        </div>
+        <form id="sitemapForm">
+            <label for="sitemap_url">Enter Sitemap URL:</label>
+            <input type="text" id="sitemap_url" name="sitemap_url" required>
+            <button type="submit">Submit</button>
+        </form>
+
+    <!-- Including jQuery for simplicity -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#sitemapForm').submit(function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                var formData = {
+                    'sitemap_url': $('input[name=sitemap_url]').val()
+                };
+
+                // Show the loading bar and hide the form
+                $('.loader-container').css('display', 'grid');
+                $('#sitemapForm').css('display', 'none');
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/processSitemap',
+                    data: formData,
+                    dataType: 'json',
+                    encode: true
+                })
+                .done(function(data) {
+                    // Show Form | Hide Loading Animation
+                    $('#sitemapForm').css('display', 'block');
+                    $('.loader-container').css('display', 'none');
+                    $('#responseArea').html(JSON.stringify(data, null, 4)); // Pretty print the JSON
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    $('.loader-container').css('display', 'none').width(0);
+                    $('#sitemapForm').css('display', 'block');
+                    $('#responseArea').html("Error: " + textStatus + " - " + errorThrown);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
