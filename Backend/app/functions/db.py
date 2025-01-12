@@ -7,7 +7,7 @@ import os
 TNS_ADMIN = os.getenv("TNS_ADMIN", "/home/opc/wallet")
 
 # Database service name (from tnsnames.ora in the wallet directory)
-DB_SERVICE = os.getenv("DB_SERVICE", "your_db_high")
+DB_SERVICE = os.getenv("DB_SERVICE", "multiversedb_high")
 
 # Initialize database connection
 def initialize_db():
