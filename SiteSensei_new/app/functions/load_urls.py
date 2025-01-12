@@ -1,3 +1,5 @@
+#load_urls.py
+
 from langchain_community.document_loaders import PlaywrightURLLoader
 from urllib.parse import urlparse
 from functions.scrape_sitemap import scrape_sitemap

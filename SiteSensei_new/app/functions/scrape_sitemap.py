@@ -1,3 +1,5 @@
+#scrape_sitemap.py
+
 import xml.etree.ElementTree as ET
 import requests
 from urllib.parse import urlparse
