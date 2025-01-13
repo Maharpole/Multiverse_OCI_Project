@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, redirect, url_for, session
 from urllib.parse import urlparse
 import httpx
 import uuid
@@ -14,22 +14,52 @@ from langchain_core.vectorstores import VectorStoreRetriever
 from langchain.chains import RetrievalQA
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
+#local imports
+
 from functions.scrape_sitemap import scrape_sitemap
 from functions.load_urls import load_urls
-from functions.db import initialize_db, store_api_key, get_file_path
+from functions.db import initialize_db, register_user, authenticate_user, store_api_key, get_file_path
+
 
 app = Flask(__name__)
 embedding = OpenAIEmbeddings()
 initialize_db()
 
 #Front End endpoints
-@app.route('/', methods=['GET'])
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if register_user(username, password):
+            return redirect(url_for('login'))
+        else:
+            return render_template('register.html', error="Username already exists.")
+    return render_template('register.html')
 
-@app.route('/login', methods=['GET'])
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if authenticate_user(username, password):
+            session['username'] = username
+            return redirect(url_for('index'))
+        else:
+            return render_template('login.html', error="Invalid credentials.")
+    return render_template('login.html')
+
+@app.route('/logout', methods=['GET'])
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('login'))
 
 @app.route('/home', methods=['GET'])
 def index():
-    return render_template("index.html")
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('index.html', username=session['username'])
+
 
 @app.route('/question_sandbox', methods=['GET'])
 def sandbox():

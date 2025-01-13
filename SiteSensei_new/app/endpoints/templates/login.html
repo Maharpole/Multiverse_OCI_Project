@@ -15,27 +15,19 @@
         </div>
         <div id="card">
             <h1>Login</h1>
-            <form id="loginForm">
-                <label for="email">Email:</label>
-                <input type="text" id="email" name="email" placeholder="Enter your email" required>
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
+            <form method="POST">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
                 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <input type="password" id="password" name="password" required>
                 
                 <button type="submit">Login</button>
             </form>
-            <div id="responseArea"></div>
         </div>
     </div>
-    <script>
-        // Example client-side form submission handling (adjust as needed)
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            // Handle login logic here
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            alert(`Login with Email: ${email}, Password: ${password}`);
-        });
-    </script>
 </body>
 </html>
