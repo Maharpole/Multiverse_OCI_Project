@@ -4,16 +4,53 @@
     <meta charset="UTF-8">
     <title>Chatbot Generator</title>
     <link rel="stylesheet" type="text/css" href="static/styles.css">
+    <style>
+        /* Ensure navbar stays at the top */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(0deg, rgb(209, 208, 223) 0%, rgba(255, 255, 255, 1) 100%);
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #ddd;
+        }
+        .navbar a {
+            color: #000;
+            text-decoration: none;
+            padding: 10px 15px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #eaeaea;
+            color: black;
+        }
+        .user-info {
+            font-size: 14px;
+            color: #555;
+            margin-right: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div id="container">
-        <div class="navbar">
+    <!-- Navbar at the top -->
+    <div class="navbar">
+        <div class="links">
             <a href="/home">API Key</a>
             <a href="/question_sandbox">Question Sandbox</a>
             <a href="/register">Register</a>
             <a href="/login">Login</a>
             <a href="/logout">Logout</a>
         </div>
+        <!-- Display username -->
+        <div class="user-info">
+            Logged in as: <span id="username">Guest</span>
+        </div>
+    </div>
+
+    <div id="container">
         <div id="card">
             <h1>Generate API Key</h1>
             <div id="responseArea"></div>
@@ -32,6 +69,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Set the logged-in user's username dynamically
+            const loggedInUsername = "{{ username }}";  // Replace this with server-side username logic
+            if (loggedInUsername) {
+                $('#username').text(loggedInUsername);
+            }
+
+            // Handle form submission
             $('#sitemapForm').submit(function(event) {
                 event.preventDefault(); // Prevent the default form submission
                 var formData = {
@@ -50,14 +94,14 @@
                     encode: true
                 })
                 .done(function(data) {
-                $('.loader-container').css('display', 'none');
-                $('#sitemapForm').css('display', 'block');
-                // display generated API Key
-                if (data && data.api_key) {
-                    $('#responseArea').html("API Key: " + data.api_key, "Please save this in a safe space, you will not have access to this again.");
-                } else {
-                    $('#responseArea').html("API Key not found in the response.");
-                }
+                    $('.loader-container').css('display', 'none');
+                    $('#sitemapForm').css('display', 'block');
+                    // Display generated API Key
+                    if (data && data.api_key) {
+                        $('#responseArea').html("API Key: " + data.api_key + "<br>Please save this in a safe space, you will not have access to this again.");
+                    } else {
+                        $('#responseArea').html("API Key not found in the response.");
+                    }
                 })
                 .fail(function(jqXHR, textStatus, errorThrown) {
                     $('.loader-container').css('display', 'none');
