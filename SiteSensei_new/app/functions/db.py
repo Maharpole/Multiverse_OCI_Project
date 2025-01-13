@@ -33,3 +33,24 @@ def authenticate_user(username, password):
     result = c.fetchone()
     conn.close()
     return result is not None  # Return True if user exists
+
+def store_api_key(api_key, file_path):
+    """Store the API key and associated file path in the database."""
+    try:
+        conn = sqlite3.connect('project_db.db')
+        c = conn.cursor()
+        c.execute("INSERT INTO libraries (api_key, file_path) VALUES (?, ?)", (api_key, file_path))
+        conn.commit()
+    finally:
+        conn.close()
+
+def get_file_path(api_key):
+    """Retrieve the file path associated with the given API key from the database."""
+    try:
+        conn = sqlite3.connect('project_db.db')
+        c = conn.cursor()
+        c.execute("SELECT file_path FROM libraries WHERE api_key = ?", (api_key,))
+        result = c.fetchone()
+        return result[0] if result else None
+    finally:
+        conn.close()
