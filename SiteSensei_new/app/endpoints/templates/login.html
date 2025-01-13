@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="static/styles.css">
+</head>
+<body>
+    <div id="container">
+        <div class="navbar">
+            <a href="/">API Key</a>
+            <a href="/question_sandbox">Question Sandbox</a>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        </div>
+        <div id="card">
+            <h1>Login</h1>
+            <form id="loginForm">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" placeholder="Enter your email" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                
+                <button type="submit">Login</button>
+            </form>
+            <div id="responseArea"></div>
+        </div>
+    </div>
+    <script>
+        // Example client-side form submission handling (adjust as needed)
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Handle login logic here
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            alert(`Login with Email: ${email}, Password: ${password}`);
+        });
+    </script>
+</body>
+</html>
