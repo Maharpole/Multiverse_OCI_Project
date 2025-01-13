@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, render_template, redirect, url_for, s
 from urllib.parse import urlparse
 import httpx
 import uuid
+import os
 
 #langchain imports
 
@@ -20,8 +21,11 @@ from functions.scrape_sitemap import scrape_sitemap
 from functions.load_urls import load_urls
 from functions.db import initialize_db, register_user, authenticate_user, store_api_key, get_file_path
 
+os.environ
+
 
 app = Flask(__name__)
+app.secret_key = os.environ['SECRET']
 embedding = OpenAIEmbeddings()
 initialize_db()
 
