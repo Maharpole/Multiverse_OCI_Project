@@ -23,8 +23,11 @@ embedding = OpenAIEmbeddings()
 initialize_db()
 
 #Front End endpoints
-
 @app.route('/', methods=['GET'])
+
+@app.route('/login', methods=['GET'])
+
+@app.route('/home', methods=['GET'])
 def index():
     return render_template("index.html")
 
