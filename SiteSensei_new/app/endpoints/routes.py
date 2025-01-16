@@ -30,19 +30,9 @@ embedding = OpenAIEmbeddings()
 initialize_db()
 
 #Front End endpoints
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        if register_user(username, password):
-            return redirect(url_for('login'))
-        else:
-            return render_template('register.html', error="Username already exists.")
-    return render_template('register.html')
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    error = None
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -50,8 +40,21 @@ def login():
             session['username'] = username
             return redirect(url_for('index'))
         else:
-            return render_template('login.html', error="Invalid credentials.")
-    return render_template('login.html')
+            error = "Invalid credentials."
+    return render_template('login.html', error=error)
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if register_user(username, password):
+            return redirect(url_for('login'))
+        else:
+            error = "Username already exists."
+    return render_template('register.html', error=error)
 
 @app.route('/logout', methods=['GET'])
 def logout():
