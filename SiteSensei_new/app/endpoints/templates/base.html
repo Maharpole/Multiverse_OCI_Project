@@ -12,8 +12,8 @@
         <a href="/question_sandbox">Question Sandbox</a>
 
         {% if session.username %}
-            <span>Welcome, {{ session.username }}</span>
             <a href="/logout">Logout</a>
+            <span>Welcome, {{ session.username }}</span>
         {% else %}
             <a href="/login">Login</a>
             <a href="/register">Register</a>
