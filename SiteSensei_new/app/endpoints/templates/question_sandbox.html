@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Chatbot Generator</title>
-    <link rel="stylesheet" type="text/css" href="static/styles.css">
-</head>
-<body>
-    <div id="container">
-        <div class="navbar">
-            <a href="/">API Key</a>
-            <a href="/question_sandbox">Question Sandbox</a>
-        </div>
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
         <div id="card">
             <h1>Question Sandbox</h1>
             <div id="responseArea"></div>
