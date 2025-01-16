@@ -1,26 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Chatbot Generator</title>
-    <link rel="stylesheet" type="text/css" href="static/styles.css">
-</head>
-<body>
-    <!-- Navbar at the top -->
-    <div class="navbar">
-        <div class="links">
-            <a href="/home">API Key</a>
-            <a href="/question_sandbox">Question Sandbox</a>
-            <a href="/register">Register</a>
-            <a href="/login">Login</a>
-            <a href="/logout">Logout</a>
-        </div>
-        <!-- Display username -->
-        <div class="user-info">
-            Logged in as: <span id="username">Guest</span>
-        </div>
-    </div>
+{% extends "base.html" %}
 
+{% block title %}Login{% endblock %}
+
+{% block content %}
     <div id="container">
         <div id="card">
             <h1>Generate API Key</h1>

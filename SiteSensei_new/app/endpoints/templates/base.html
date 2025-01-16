@@ -10,15 +10,15 @@
     <div class="navbar">
         <a href="/">API Key</a>
         <a href="/question_sandbox">Question Sandbox</a>
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
+    
+        {% if session.username %}
+            <span>Welcome, {{ session.username }}</span>
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        {% endif %}
     </div>
-
-    <!-- Content Block -->
-    <div id="container">
-        {% block content %}
-        <!-- Page-specific content will go here -->
-        {% endblock %}
-    </div>
+    
 </body>
 </html>
