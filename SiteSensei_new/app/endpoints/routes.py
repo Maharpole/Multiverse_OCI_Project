@@ -61,7 +61,7 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
 
-@app.route('/home', methods=['GET'])
+@app.route('/', methods=['GET'])
 def index():
     if 'username' not in session:
         return redirect(url_for('login'))
