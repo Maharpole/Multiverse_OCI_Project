@@ -1,21 +1,22 @@
 body {
-    font-family: Arial, sans-serif; /* Use a modern font */
-    background-color: #f4f4f4; /* Light grey background */
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
+    height: 100vh; /* Full viewport height */
     display: flex;
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
 }
 
 .navbar {
-    width: 100%; /* Make the navbar span the full width */
-    display: flex; /* Enables flexbox */
-    justify-content: space-around; /* Distributes space around items */
-    align-items: center; /* Vertically centers the items in the navbar */
-    background: linear-gradient(0deg, rgb(209, 208, 223) 0%, rgba(255,255,255,1) 100%);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(0deg, rgb(209, 208, 223) 0%, rgba(255, 255, 255, 1) 100%);
     padding: 10px 0;
     border-bottom: 2px solid #ddd;
-    position: fixed; /* Keep the navbar fixed at the top */
+    position: fixed; /* Fixed at the top */
     top: 0;
     z-index: 1000;
 }
@@ -34,50 +35,29 @@ body {
 }
 
 #container {
-    margin-top: 80px; /* Add margin to account for the fixed navbar height */
+    width: 100%; /* Full width of the viewport */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    flex-direction: column; /* Stack content vertically */
+    margin: 0; /* No additional margin needed */
+    position: relative;
+    height: calc(100vh - 80px); /* Full height minus the navbar */
+    margin-top: 80px; /* Ensure content starts below navbar */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.26);
     border-radius: 20px;
-    display: flex;
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
-    flex-direction: column; /* Stack content vertically */
 }
 
 #card {
     background-color: rgb(250, 251, 255);
     padding: 20px;
     border-radius: 20px;
-    border-top-right-radius: 0px;
-    border-top-left-radius: 0px;
     width: 300px;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-#responseArea {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: larger;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #eaeaea;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    min-height: 50px;
-    word-wrap: break-word;
-}
-
-
-#loadingBar {
-    width: 0%;
-    height: 30px;
-    background-color: #4CAF50;
-    text-align: center;
-    line-height: 30px;
-    color: white;
-    display: none;
-}
-
-input[type="text"], button {
+input[type="text"], input[type="password"], button {
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ddd;
@@ -96,57 +76,4 @@ button {
 
 button:hover {
     background-color: #4a54e1;
-}
-
-.loader-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 80px;
-    display:none;
-}
-
-/* HTML: <div class="loader"></div> */
-.loader {
-    width: 45px;
-    aspect-ratio: 1;
-    background: 
-      linear-gradient(#0000 calc(1*100%/6),#000 0 calc(3*100%/6),#0000 0) left   bottom,
-      linear-gradient(#0000 calc(2*100%/6),#000 0 calc(4*100%/6),#0000 0) center bottom,
-      linear-gradient(#0000 calc(3*100%/6),#000 0 calc(5*100%/6),#0000 0) right  bottom;
-    background-size: 20% 600%;
-    background-repeat: no-repeat;
-    animation: l3 1s infinite linear;
-  }
-  @keyframes l3 {
-      100% {background-position: left top,center top,right top }
-  }
-
-#container {
-    margin: 20px 20px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.26);
-    border-radius: 20px;
-}
-.navbar {
-    display: flex; /* Enables flexbox */
-    justify-content: space-around; /* Distributes space around items */
-    align-items: center; /* Vertically centers the items in the navbar */
-    background: rgb(132,130,161);
-    background: linear-gradient(0deg, rgb(209, 208, 223) 0%, rgba(255,255,255,1) 100%);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-.navbar a {
-    float:inline-start;
-    display: block;
-    color: #000000;
-    text-align: center;
-    padding: 20px 30px;
-    text-decoration: none;
-}
-.navbar a:hover {
-    background-color: rgb(218, 218, 218);
-    color: black;
-    
 }
